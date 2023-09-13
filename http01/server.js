@@ -1,26 +1,60 @@
 const http = require("http");
-
-const server = http.createServer();
-
-server.listen(8000);
-
-const todo = "Go Home";
-
-server.on("request", (req, res) => {
+function httpHandler(req, res) {
   console.log(req.url);
-  if (req.url === "./todo") {
-    res.statusCode = 200;
-    es.setHeader("content-type", "text/html");
-    res.write("<h1>Hello CodeCamp</h1>");
+  if (req.url === "/todo") {
+    // res.statusCode = 200;
+    // res.setHeader("content-type", "text/html");
+    // res.setHeader("We-are", "the champion");
+    res.writeHead(222, {
+      "Context-Type": "text/html",
+      "X-Power-By": "CC15",
+      "We-are": "The world",
+    });
+    res.write("<h1>Hello, Codecamp15</h1>");
     res.write("<hr>");
-    res.write(`<h1>${todo}</h1>`);
-    res.end();
+    res.write(todoHTML);
+    res.end;
   } else {
     res.statusCode = 200;
     res.setHeader("content-type", "text/html");
-    res.write("<h1>Hello CodeCamp !!!</h1>");
+    res.write("<h1>Hello, Codecamp15</h1>");
     res.write("<hr>");
-    res.write("<p>is the BestCamp</p>");
+    res.write("<h3>is very best</h3>");
     res.end();
   }
-});
+}
+const server = http.createServer(httpHandler);
+
+server.listen(8000);
+
+const todo = ["Go Home", "Go Learn", "Go Lunch"];
+const todoHTML = todo
+  .map((el) => {
+    return `<h1>${el}</h1>`;
+  })
+  .join("");
+
+// server.on("request", (req, res) => {
+//   console.log(req.url);
+//   if (req.url === "/todo") {
+//     // res.statusCode = 200;
+//     // res.setHeader("content-type", "text/html");
+//     // res.setHeader("We-are", "the champion");
+//     res.writeHead(222, {
+//       "Context-Type": "text/html",
+//       "X-Power-By": "CC15",
+//       "We-are": "The world",
+//     });
+//     res.write("<h1>Hello, Codecamp15</h1>");
+//     res.write("<hr>");
+//     res.write(todoHTML);
+//     res.end;
+//   } else {
+//     res.statusCode = 200;
+//     res.setHeader("content-type", "text/html");
+//     res.write("<h1>Hello, Codecamp15</h1>");
+//     res.write("<hr>");
+//     res.write("<h3>is very best</h3>");
+//     res.end();
+//   }
+// });
